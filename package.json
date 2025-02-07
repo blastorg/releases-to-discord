@@ -5,28 +5,28 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-      "discord",
-      "github",
-      "release",
-      "action",
-      "release-to-discord",
-      "webhook",
-      "github-action",
-      "changelog"
+        "discord",
+        "github",
+        "release",
+        "action",
+        "release-to-discord",
+        "webhook",
+        "github-action",
+        "changelog"
     ],
     "author": "Sillyangel",
     "bugs": {
-      "url": "https://github.com/sillyangel/releases-to-discord/issues"
+        "url": "https://github.com/sillyangel/releases-to-discord/issues"
     },
     "homepage": "https://github.com/sillyangel/releases-to-discord#readme",
     "license": "MIT",
     "dependencies": {
-      "@actions/core": "^1.9.1",
-      "@actions/github": "^5.0.3",
-      "node-fetch": "^3.2.10"
-    }
-  }
-  
+        "@actions/core": "^1.9.1",
+        "@actions/github": "^5.0.3",
+        "node-fetch": "^3.2.10"
+    },
+    "packageManager": "pnpm@10.2.1+sha512.398035c7bd696d0ba0b10a688ed558285329d27ea994804a52bad9167d8e3a72bcb993f9699585d3ca25779ac64949ef422757a6c31102c12ab932e5cbe5cc92"
+}
