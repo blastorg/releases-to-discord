@@ -1,43 +1,50 @@
 # GitHub Releases To Discord Action
+
 A GitHub action that parses a GitHub release and posts it to a Discord channel as a stylized Discord webhook.
 
 ---
+
 ## Output
+
 ![output]()
 
 ## Configuration
 
-| Variable   | Required | Default                                                                                                   | Description                                |
-|------------|----------|----------------------------------------------------------------------------------------------------------------|--------------------------------------------|
-| webhook_url | ✔      |                                                                                                                | Discord's webhook url. Use GH repo secrets. |
-| color      | ❌       | "2105893"                                                                                                      | Decimal color value for embed.             |
-| username   | ❌       | "Release Changelog"                                                                                            | String username for webhook.               |
-| avatar_url | ❌       | ["Profile Picture"](https://cdn.discordapp.com/avatars/487431320314576937/bd64361e4ba6313d561d54e78c9e7171.png) | String url to webhook avatar picture.      |
+| Variable         | Required | Default                                                                                                         | Description                                 |
+| ---------------- | -------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| webhook_url      | ✔        |                                                                                                                 | Discord's webhook url. Use GH repo secrets. |
+| color            | ❌       | "2105893"                                                                                                       | Decimal color value for embed.              |
+| username         | ❌       | "Release Changelog"                                                                                             | String username for webhook.                |
+| avatar_url       | ❌       | ["Profile Picture"](https://cdn.discordapp.com/avatars/487431320314576937/bd64361e4ba6313d561d54e78c9e7171.png) | String url to webhook avatar picture.       |
+| release_tag_name | ❌       |                                                                                                                 | Override tag name to pull from.             |
+| github_token     | ❌       |                                                                                                                 | GITHUB_TOKEN to use if overriding tag_name. |
 
 ## Example Usage
 
 `.github/workflows/releases-to-discord.yml`
+
 ```yaml
 on:
-  release:
-    types: [published]
+    release:
+        types: [published]
 
 jobs:
-  github-releases-to-discord:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Github Releases To Discord
-        uses: sillyangel/releases-to-discord@v1.0.0
-        with:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
-          color: "2105893"
-          username: "Release Changelog"
-          avatar_url: "https://cdn.discordapp.com/avatars/487431320314576937/bd64361e4ba6313d561d54e78c9e7171.png"
+    github-releases-to-discord:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Github Releases To Discord
+              uses: sillyangel/releases-to-discord@v1.0.0
+              with:
+                  webhook_url: ${{ secrets.WEBHOOK_URL }}
+                  color: '2105893'
+                  username: 'Release Changelog'
+                  avatar_url: 'https://cdn.discordapp.com/avatars/487431320314576937/bd64361e4ba6313d561d54e78c9e7171.png'
 ```
 
 ## Setup Instructions
+
 1. Open your **Server Settings** and head into the **Integrations** tab:
 2. Click the "**Create Webhook**" button to create a new webhook!
    ![](https://support.discord.com/hc/article_attachments/1500000463501/Screen_Shot_2020-12-15_at_4.41.53_PM.png)
