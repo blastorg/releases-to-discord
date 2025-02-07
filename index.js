@@ -1,6 +1,6 @@
-import core from '@actions/core';
-import github from '@actions/github';
-import fetch from 'node-fetch';
+import core from '@actions/core'
+import github from '@actions/github'
+import fetch from 'node-fetch'
 
 /**
  * Stylizes a markdown body into an appropriate embed message style.
@@ -12,12 +12,12 @@ import fetch from 'node-fetch';
  */
 const formatDescription = (description) => {
     return description
-        .replace(/### (.*?)\n/g,function (substring) {
-            const newString = substring.slice(4).replace(/(\r\n|\n|\r)/gm, "")
+        .replace(/### (.*?)\n/g, function (substring) {
+            const newString = substring.slice(4).replace(/(\r\n|\n|\r)/gm, '')
             return `**__${newString}__**`
         })
-        .replace(/## (.*?)\n/g,function (substring) {
-            const newString = substring.slice(3).replace(/(\r\n|\n|\r)/gm, "")
+        .replace(/## (.*?)\n/g, function (substring) {
+            const newString = substring.slice(3).replace(/(\r\n|\n|\r)/gm, '')
             return `**${newString}**`
         })
         .replace(/\n\s*\n/g, '\n')
@@ -44,7 +44,7 @@ async function getContext(releasePayload) {
  * Get inputs, creates a stylized response webhook, and sends it to the channel.
  * @returns {Promise<void>}
  */
-async function run () {
+async function run() {
     const webhookUrl = core.getInput('webhook_url')
     const color = core.getInput('color')
     const username = core.getInput('username')
@@ -88,26 +88,30 @@ async function run () {
         title: `Release ${version}`,
         url: html_url,
         color: color,
-        description: description
+        description: description,
     }
 
     const requestBody = {
         username: username,
         avatar_url: avatarUrl,
-        embeds: [embedMsg]
+        embeds: [embedMsg],
     }
 
     const url = `${webhookUrl}?wait=true`
     fetch(url, {
         method: 'post',
         body: JSON.stringify(requestBody),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
     })
-        .then(res => res.json())
-        .then(data => core.info(JSON.stringify(data)))
-        .catch(err => core.info(err))
+        .then((res) => res.json())
+        .then((data) => core.info(JSON.stringify(data)))
+        .catch((err) => core.info(err))
 }
 
 run()
-    .then(() => {core.info('Action completed successfully')})
-    .catch(err => {core.setFailed(err.message)})
+    .then(() => {
+        core.info('Action completed successfully')
+    })
+    .catch((err) => {
+        core.setFailed(err.message)
+    })
